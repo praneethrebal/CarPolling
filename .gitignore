@@ -1,0 +1,20 @@
+# Java Spring Boot
+/target/
+*.jar
+*.war
+*.class
+/bin/
+/build/
+*.log
+.mvn/
+.settings/
+.project
+.classpath
+
+# Node.js (React.js)
+node_modules/
+.env
+.next/
+.cache/
+yarn.lock
+npm-debug.log
