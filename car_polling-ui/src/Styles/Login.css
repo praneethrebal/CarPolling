@@ -1,0 +1,84 @@
+.login-main {
+  margin: 0px;
+  padding: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../Resources/images/login-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.login-container_main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  backdrop-filter: blur(3px);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  width: 350px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+.login-form span {
+  font-weight: 650;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-size: large;
+}
+.login-form-group {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+.login-form-group label {
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+}
+.login-form-group input {
+  background: rgb(238, 230, 230);
+  border-radius: 8px;
+  color: rgb(0, 0, 0);
+  font-size: large;
+  border: none;
+  padding: 5px;
+  outline: none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+.login-form-group input::placeholder {
+  color: rgb(162, 167, 171);
+}
+
+.login-submit {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+}
+.login-submit span {
+  margin-top: 10px;
+  font-weight: 200px;
+  font-size: small;
+  color: rgb(252, 255, 255);
+  justify-content: center;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.login-submit button {
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: blue;
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+button:hover {
+  background-color: #fff;
+  color: #4a4a4a;
+}

@@ -1,6 +1,9 @@
 package com.carPooling.entity;
 
 
+
+
+
 import com.carPooling.entity.enums.Role;
 
 import jakarta.persistence.Column;
@@ -11,11 +14,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {

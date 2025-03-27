@@ -43,5 +43,12 @@ public class GlobalExcepation {
 		ErrorResponseDTO error= new ErrorResponseDTO(req.getDescription(false), HttpStatus.NOT_ACCEPTABLE, excapation.getMessage(), LocalDateTime.now());
 		return new  ResponseEntity<>(error,HttpStatus.NOT_ACCEPTABLE) ;
 	}
+	
+	@ExceptionHandler(NoHistoryExcepation.class)
+	public ResponseEntity<ErrorResponseDTO> handleNoHistoryExcepation(NoHistoryExcepation excepation,WebRequest req)
+	{
+		ErrorResponseDTO res=new ErrorResponseDTO(req.getDescription(false), HttpStatus.ACCEPTED, excepation.getMessage(), LocalDateTime.now());
+		return new ResponseEntity<>(res,HttpStatus.ACCEPTED);
+	}
 
 }

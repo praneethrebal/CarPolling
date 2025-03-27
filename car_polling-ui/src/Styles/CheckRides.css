@@ -1,0 +1,176 @@
+.search-main {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  background-color: aquamarine;
+  background-repeat: repeat;
+  justify-content: space-around;
+}
+.search-container {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  /* border: 1px solid black; */
+  align-items: center;
+  margin-top: 20px;
+}
+.search-form span {
+  text-align: center;
+  margin-top: 20px;
+  font-size: xx-large;
+  font-weight: bold;
+}
+.search-form {
+  margin-top: 5px;
+
+  width: 30vw;
+}
+
+.search-form-group {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+.search-form-group label {
+  font-size: 3ch;
+  margin-top: 10px;
+}
+
+.search-form-group input {
+  border: none;
+  border-bottom: 1px solid orange;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px;
+  font-size: 19px;
+}
+.avaliable-rides {
+  margin-top: 20px;
+  width: 57vw;
+  padding: 10px;
+  text-align: center;
+}
+.avaliable-rides span {
+  font-size: large;
+}
+
+.search-btn {
+  display: flex;
+  margin-top: 10px;
+}
+.search-btn button {
+  background-color: orange;
+  border: none;
+  width: 100%;
+  margin-top: 7px;
+  border-radius: 6px;
+  padding: 6px;
+}
+.all-rides {
+  background-color: rgb(240, 166, 30);
+  color: white;
+  margin: 10px;
+  padding: 5px;
+  width: 55vw;
+  border-radius: 5px;
+  border: 1px solid black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.all-rides:hover {
+  transform: scale(1.05); /* Slightly enlarges the div */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Adds shadow */
+  background-color: #fff;
+  color: black;
+}
+
+.all-rides p {
+  margin: 0px;
+  padding: 3px;
+  display: inline;
+}
+.book-btn {
+  background-color: #fff;
+  border-radius: 6px;
+  border: 0.2px solid black;
+  width: 20%;
+}
+
+.search-history {
+  display: flex;
+  width: 35%;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.my-bookings,
+.my-history {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 45vh;
+  width: 100%;
+  border: 0.5px solid black;
+  margin-bottom: 8px;
+
+  overflow-y: scroll; /* Enables vertical scrolling when content exceeds height */
+
+  max-height: 45vh; /* Ensures content does not overflow the container */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #0d0d0d #f1f1f1; /* For Firefox */
+}
+.my-bookings::-webkit-scrollbar,
+.my-history::-webkit-scrollbar {
+  width: 8px; /* Width of scrollbar */
+}
+
+.my-history {
+  /* min-height: 48.3vh; */
+  max-height: 48.3vh;
+}
+
+.my-bookings span,
+.my-history span {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+}
+.bookings {
+  width: 100%;
+  min-height: 41.5vh;
+}
+.history {
+  width: 100%;
+  min-height: 47.3vh;
+  border: 0.5px solid black;
+}
+.book-map {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Ensures 2 columns */
+  gap: 10px; /* Adds spacing between elements */
+  border: 0.5px solid black;
+
+  overflow-x: auto; /* Enables horizontal scrolling */
+  scrollbar-width: thin;
+  white-space: nowrap; /* Prevents text from wrapping */
+  max-width: 100%; /* Ensures it does not overflow parent container */
+  padding: 10px;
+}
+.book-map::-webkit-scrollbar {
+  height: 8px; /* Scrollbar height */
+}
+
+.book-map::-webkit-scrollbar-thumb {
+  background: #180101; /* Scrollbar thumb color */
+  border-radius: 4px;
+}
+
+.book-map::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Scrollbar track color */
+}
+.book-map p {
+  margin: 0px;
+  padding: 0px;
+}

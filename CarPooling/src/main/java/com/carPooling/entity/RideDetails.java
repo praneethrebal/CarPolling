@@ -1,22 +1,24 @@
 package com.carPooling.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
-import com.carPooling.entity.enums.Payment;
+import com.carPooling.entity.enums.RideConformation;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RideDetails {
@@ -28,12 +30,9 @@ public class RideDetails {
 	private String EndPoint;
 	private LocalDateTime startTime;
 	private Long totalAmount;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private User driverDetails;
 	
-	@ManyToOne
-	private User passeangerDetails;
-	@Enumerated(EnumType.STRING)
-	private Payment isPaid=Payment.UNPAID;
+
 	
 }

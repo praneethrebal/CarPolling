@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.carPooling.dto.BookingDTO;
 import com.carPooling.dto.DriverRideDto;
+import com.carPooling.dto.HistoryDto;
 import com.carPooling.dto.SerchRide;
+import com.carPooling.service.BookingHistoryService;
 import com.carPooling.service.BookingService;
 import com.carPooling.service.RideService;
 
@@ -29,6 +32,8 @@ public class PasseangerController {
 	private  RideService rideService;
 	@Autowired
 	private BookingService bookingService;
+	@Autowired
+	private BookingHistoryService bookingHistoryService;
 	
 	@PostMapping("/search")
 	public ResponseEntity<List<DriverRideDto> >  searchRide(@RequestBody SerchRide searhRide)
@@ -42,6 +47,23 @@ public class PasseangerController {
 	public ResponseEntity<BookingDTO> bookRide(@PathVariable Long id)
 	{
 		BookingDTO bookings=bookingService.bookRide(id);
+		return ResponseEntity.status(HttpStatus.OK).body(bookings);
+	}
+	@GetMapping("/history")
+	public ResponseEntity<List<HistoryDto>> history()
+	{
+		List<HistoryDto> his=bookingHistoryService.getHistory();
+//		if(his.isEmpty())
+//		{
+//			throw new NoHistoryExcepation("No past Bookings");
+//		}
+		return ResponseEntity.status(HttpStatus.OK).body(his);
+	}
+	
+	@GetMapping("/my-bookings")
+	public ResponseEntity<List<BookingDTO>>  myBookings()
+	{
+		List<BookingDTO> bookings=bookingService.getAllBookings();
 		return ResponseEntity.status(HttpStatus.OK).body(bookings);
 	}
 

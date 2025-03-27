@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.carPooling.dto.BookingConformationDTO;
 import com.carPooling.dto.BookingDTO;
 import com.carPooling.dto.DriverRideDto;
 import com.carPooling.dto.ResponseDTO;
@@ -31,37 +30,53 @@ import lombok.RequiredArgsConstructor;
 public class DriverController {
 	private final RideService rideService;
 	private final BookingService bookingService;
-	
-	
+
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> postRide(@RequestBody DriverRideDto driverDetails)
 	{
 		rideService.newRide(driverDetails);
 		return ResponseEntity.status(HttpStatus.CREATED).body( new ResponseDTO(HttpStatus.CREATED,"Ride Posted Sucessfully"));
 	}
-	
-	
+
 	@GetMapping("findAllrides")
 	public ResponseEntity<List< BookingDTO>> findAllRides()
 	{
 		List<BookingDTO> bookingDTO=  bookingService.findAllRides();
 		return ResponseEntity.status(HttpStatus.OK).body(bookingDTO );
 	}
-	@PutMapping("/conform-ride/{id}")
-	public ResponseEntity<ResponseDTO> rideConformation(@RequestBody BookingConformationDTO rideStatus,@PathVariable Long id)
+	
+	@PutMapping("comform-ride/{id}")
+	public ResponseEntity<ResponseDTO> conformRide(@PathVariable long id)
 	{
-		bookingService.conformRide(rideStatus,id);
-		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(HttpStatus.CREATED,"Ride Conformed"));
 		
+		bookingService.conformRide(id);
+		return ResponseEntity
+				.status(HttpStatus.ACCEPTED)
+				.body(new ResponseDTO(HttpStatus.ACCEPTED, "Ride Acpected"));
+	}
+
+	@PutMapping("reject-ride/{id}")
+	public ResponseEntity<ResponseDTO> rejectRide(@PathVariable long id)
+	{
+		bookingService.rejectRide(id);
+		return ResponseEntity
+				.status(HttpStatus.BAD_REQUEST)
+				.body(new ResponseDTO(HttpStatus.BAD_REQUEST, "Ride Rejected"));
 	}
 	
-	@DeleteMapping("/ride-complected/{id}")
-	public ResponseEntity<ResponseDTO> rideComplected(@RequestBody BookingConformationDTO rideStatus,@PathVariable Long id)
+	@DeleteMapping("ride-complected/{id}")
+	public ResponseEntity<ResponseDTO> rideComplected(@PathVariable Long id)
 	{
-		rideConformation(rideStatus, id);
-		rideService.deleteRide(id);
-		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(HttpStatus.OK,"Ride Complected"));
+		
+		bookingService.completeRide(id);
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(new ResponseDTO(HttpStatus.OK,"Ride Complected"));
 	}
+
+
+	
+
 	
 	
 
