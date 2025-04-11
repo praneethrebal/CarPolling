@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.carPooling.entity.RideDetails;
-
-import jakarta.transaction.Transactional;
 
 
 @Repository
@@ -21,6 +20,9 @@ public interface RideDetailsRepo extends JpaRepository<RideDetails, Long>{
 	@Modifying
 	@Query("delete from RideDetails r where r.id=:rideDetails")
 	void deleteRecord(Long rideDetails);
+
+	@Query("SELECT CASE WHEN COUNT(r) > 0 THEN TRUE ELSE FALSE END FROM RideDetails r WHERE r.driverDetails.id = :userId")
+	boolean existsByUserId(@Param("userId") Long userId);
 	
 //	@Modifying
 //	@Transactional

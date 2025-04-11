@@ -11,6 +11,7 @@ import com.carPooling.dto.DriverRideDto;
 import com.carPooling.dto.SerchRide;
 import com.carPooling.entity.RideDetails;
 import com.carPooling.entity.User;
+import com.carPooling.excepations.DriverAleadyPostedRideExcepation;
 import com.carPooling.excepations.DriverNotFoundExcepation;
 import com.carPooling.excepations.RidesNotAvaliableExcepation;
 import com.carPooling.repo.RideDetailsRepo;
@@ -32,12 +33,19 @@ public class RideService {
 
 	public void newRide(DriverRideDto rideDetails) {
 		RideDetails ride= new RideDetails();
-		
+//		UserDetails authUser=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		String usernamess=authUser.getUsername();
+//		System.out.println("usename"+usernamess);
 		User driverDet=userRepo.findByUsername(rideDetails.getDriverName());
 		
 		if(driverDet == null)
 		{
 			throw new DriverNotFoundExcepation("Driver Not Found");
+		}
+		boolean check=rideDetailsRepo.existsByUserId(driverDet.getId());
+		if(check)
+		{
+			throw new DriverAleadyPostedRideExcepation("Drive can post only one ride at a time");
 		}
 		
 		ride.setStartPoint(rideDetails.getStartPoint());

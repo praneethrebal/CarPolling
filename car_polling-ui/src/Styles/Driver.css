@@ -1,0 +1,109 @@
+.Driver-Main {
+  height: 100vh;
+  width: 100vw;
+  background-color: aqua;
+  background-repeat: repeat;
+  display: flex;
+}
+
+.left {
+  padding: 3px;
+  height: 100%;
+  width: 55%;
+
+  display: flex;
+  justify-content: center;
+}
+.Ride-Post {
+  display: flex;
+  margin-top: 15px;
+}
+.Details label {
+  font-size: 3ch;
+  margin-top: 5px;
+}
+.Details input {
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  padding: 6px;
+  font-size: 19px;
+}
+.driver-formGroup {
+  display: flex;
+  gap: 2px;
+  flex-direction: column;
+}
+.postbtn button {
+  background-color: orange;
+  padding: 6px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+}
+.right {
+  padding: 3px;
+  height: 100%;
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid black;
+}
+
+.rides {
+  margin-top: 7px;
+  padding: 5px;
+  min-width: 98%;
+  min-height: 60vh;
+  max-width: 98%;
+  max-height: 60vh;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  border: 1px solid black;
+}
+
+.ride-card {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; /* Adds spacing between elements */
+  border: 0.5px solid black;
+  overflow-x: auto; /* Enables horizontal scrolling */
+  scrollbar-width: thin;
+  white-space: nowrap; /* Prevents text from wrapping */
+  max-width: 100%; /* Ensures it does not overflow parent container */
+  max-height: 80%;
+  padding: 10px;
+}
+.ride-card p {
+  margin: 0px;
+  padding: 0px;
+}
+.ride-card button {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  border: none;
+}
+.ride-actions {
+  display: flex;
+  justify-content: space-between; /* space between buttons */
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ride-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  background-color: orange;
+}
+.ride-actions button:hover {
+  background-color: aliceblue;
+}

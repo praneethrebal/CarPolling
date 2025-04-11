@@ -1,15 +1,17 @@
 package com.carPooling.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import com.carPooling.entity.Booking;
 import com.carPooling.entity.enums.RideConformation;
 
 import jakarta.transaction.Transactional;
-
-import java.util.List;
 
 @Repository
 public interface BookingRepo extends JpaRepository<Booking, Long>{
@@ -37,7 +39,18 @@ public interface BookingRepo extends JpaRepository<Booking, Long>{
 	void deleteRecord(Long booking);
 
 	
+	@Modifying
+	@Transactional
+	@Query("UPDATE Booking b SET b.rideStatus = 'REJECTED', b.rideDetails = NULL WHERE b.rideDetails.id = :rideId AND b.id <> :acceptedBookingId")
+	void rejectOtherBookings(@Param("rideId") Long rideId, @Param("acceptedBookingId") Long acceptedBookingId);
 	
-//	
+	@Query("select  b from Booking b where b.rideStatus = 'REJECTED'")
+	List<Booking> gellAllRejected();
+   
+	@Transactional
+	@Modifying
+	@Query("delete from Booking b where b.rideStatus = 'REJECTED'")
+	void deleteRejected();	
+	
 
 }

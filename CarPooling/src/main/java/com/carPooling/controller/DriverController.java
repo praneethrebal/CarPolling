@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/driver")
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin()
+@CrossOrigin(origins = "http://localhost:3000")
 public class DriverController {
 	private final RideService rideService;
 	private final BookingService bookingService;
@@ -60,8 +60,8 @@ public class DriverController {
 	{
 		bookingService.rejectRide(id);
 		return ResponseEntity
-				.status(HttpStatus.BAD_REQUEST)
-				.body(new ResponseDTO(HttpStatus.BAD_REQUEST, "Ride Rejected"));
+				.status(HttpStatus.OK)
+				.body(new ResponseDTO(HttpStatus.OK, "Ride Rejected"));
 	}
 	
 	@DeleteMapping("ride-complected/{id}")

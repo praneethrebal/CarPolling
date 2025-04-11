@@ -3,9 +3,6 @@ package com.carPooling.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
-
-import com.carPooling.entity.User;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

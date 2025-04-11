@@ -65,15 +65,32 @@ public class BookingService {
 		return book.stream().map(this::dto).collect(Collectors.toList());
 	}
 	
+	@Transactional
 	public void conformRide(long id) {
-		RideConformation status=RideConformation.ACCEPTED;
-		bookingRepo.updateRideStatus(status,id );
-		
+
+		Booking accpect=bookingRepo.findById(id).orElse(null);
+		RideDetails ride=accpect.getRideDetails();
+		  if (ride == null) {
+		        throw new RuntimeException("Ride details not found for this booking");
+		    }
+		bookingRepo.updateRideStatus(RideConformation.ACCEPTED, id);
+		bookingRepo.rejectOtherBookings(ride.getId(),id);
+		List<Booking> b=bookingRepo.gellAllRejected();
+		historyService.rejectedBookings(b);
+		bookingRepo.deleteRejected();
 	}
 	public void rejectRide(long id) {
-		RideConformation status=RideConformation.REJECTED;
-		bookingRepo.updateRideStatus(status, id);
 		
+		bookingRepo.updateRideStatus(RideConformation.REJECTED, id);
+		Booking book=bookingRepo.findById(id).orElse(null);
+		List<Booking> bookingList = new ArrayList<>();
+		if (book != null) {
+		    bookingList.add(book);
+		}
+		historyService.rejectedBookings(bookingList);
+		bookingRepo.deleteRejected();
+		
+
 	}
 	
 	
@@ -85,17 +102,11 @@ public class BookingService {
 	    RideDetails rideDetails = booking.getRideDetails();
 	    User passenger1 =userservice .findById(booking.getPasseangerDetails().getId());
 	    User driver1 = userservice.findById(rideDetails.getDriverDetails().getId());
-//	    List<User> passenger=List.of(passenger1);
-//	    List<User> driver=List.of(driver1);
-//	    List<User> passenger = new ArrayList<>();
-//	    passenger.add(passenger1);
-//
-//	    List<User> driver = new ArrayList<>();
-//	    driver.add(driver1);
-
 	    historyService.saveHistory(booking,passenger1,driver1,rideDetails);
-	    bookingRepo.deleteRecord(booking.getId());
+	    bookingRepo.deleteRecord(bookingId);
+	    
 	    rideService.delete(rideDetails.getId());
+	    
 	}
 	
 
@@ -105,11 +116,7 @@ public class BookingService {
 	//-----------------------------------------------------
 	// MAPPINGS FUNCTIONS
 	//-----------------------------------------------------
-	
-	private String getAuthenticatedUsername() {
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return userDetails.getUsername();
-	}
+
 	private BookingDTO dto(Booking book)
 	{
 		BookingDTO dto=new BookingDTO();
@@ -143,7 +150,12 @@ public class BookingService {
 	
 	//-------------------------------------------
 	// Get Authorize User
-	//-------------------------------------------\
+	//-------------------------------------------
+	
+	private String getAuthenticatedUsername() {
+		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return userDetails.getUsername();
+	}
 	public String getAuthUser()
 	{
 		UserDetails details=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

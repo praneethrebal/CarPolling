@@ -50,5 +50,11 @@ public class GlobalExcepation {
 		ErrorResponseDTO res=new ErrorResponseDTO(req.getDescription(false), HttpStatus.ACCEPTED, excepation.getMessage(), LocalDateTime.now());
 		return new ResponseEntity<>(res,HttpStatus.ACCEPTED);
 	}
-
+	
+	@ExceptionHandler(DriverAleadyPostedRideExcepation.class)
+	public ResponseEntity<ErrorResponseDTO> handleDriverAleadyPostedRideExcepation(DriverAleadyPostedRideExcepation excepation,WebRequest req)
+	{
+		ErrorResponseDTO res=new ErrorResponseDTO(req.getDescription(false), HttpStatus.CONFLICT, excepation.getMessage(), LocalDateTime.now());
+		return new ResponseEntity<>(res,HttpStatus.CONFLICT);
+	}
 }

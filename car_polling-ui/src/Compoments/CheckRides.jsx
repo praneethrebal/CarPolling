@@ -48,7 +48,6 @@ const CheckRides = () => {
           alert("Ride is Booked Sucessfully");
           console.log("ride Booked", res.data);
           fetchBookings();
-          // setRidesAvaliable(true);
         })
         .catch((err) => {
           setRides([]);
@@ -72,13 +71,13 @@ const CheckRides = () => {
       }
     )
       .then((res) => {
-        console.log("data from bookings", res.data);
         setBookings(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   useEffect(() => {
     fetchBookings();
   }, [token]);

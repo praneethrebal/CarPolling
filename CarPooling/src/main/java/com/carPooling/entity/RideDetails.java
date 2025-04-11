@@ -1,10 +1,6 @@
 package com.carPooling.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-
-import com.carPooling.entity.enums.RideConformation;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

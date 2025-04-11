@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class BookingHistoryService {
 	private final BookingHistoryRepo bookingHistoryRepo;
 	private final UserService userService;
+	
 
 	public void saveHistory(Booking booking,User passenger, User driver,RideDetails rideDetails) {
 		BookingHistory history = new BookingHistory();
@@ -60,6 +61,24 @@ public class BookingHistoryService {
 		dto.setTime(bookinghistory1.getTime());
 		return dto;
 	}
+
+	public void rejectedBookings(List<Booking> b) {
+		// TODO Auto-generated method stub
+		BookingHistory bh=new BookingHistory();
+		for(Booking b1 : b)
+		{
+			bh.setDate(b1.getDate());
+			bh.setDriverDetails(userService.findById(b1.getDriverId()));
+			bh.setPassengerDetails(b1.getPasseangerDetails());
+			bh.setRideStatus(b1.getRideStatus());
+			bh.setTime(b1.getTime());
+//			bh.setTotalAmount(b1.get);
+			
+		}
+		bookingHistoryRepo.save(bh);
+		
+	}
+
 
 
 }
