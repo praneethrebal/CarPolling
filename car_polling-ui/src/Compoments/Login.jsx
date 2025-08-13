@@ -23,8 +23,9 @@ const Login = () => {
     )
       .then((res) => {
         saveToken(res.data.token);
-        if (res.data.role !== "DRIVER") navigate("/serchRide");
-        else navigate("/driver");
+        if (res.data.role !== "DRIVER")
+          navigate("/serchRide", { replace: true });
+        else navigate("/driver", { replace: true });
       })
       .catch((err) => {
         if (err.status === 401) alert("Check username and Password");
