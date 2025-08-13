@@ -27,14 +27,22 @@ public class UserService {
 	}
 
 	public String verify(String username, String password) {
-		Authentication authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		User user=userRepo.findByUsername(username);
+		 if (user == null) {
+		        throw new UsernameNotFoundException("Invalid Username");
+		    }
+
+		Authentication authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+		
+		
 		if(authentication !=null)
 		{
 			return jwtService.generateToken(user);
 		}
-		 throw new UsernameNotFoundException("Enter Valid Details");
+		 return null;
 	}
+	
+	
 
 	public void register(User user) {
 		if(user == null)

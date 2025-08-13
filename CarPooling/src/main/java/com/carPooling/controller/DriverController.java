@@ -63,7 +63,7 @@ public class DriverController {
 				.status(HttpStatus.OK)
 				.body(new ResponseDTO(HttpStatus.OK, "Ride Rejected"));
 	}
-	
+
 	@DeleteMapping("ride-complected/{id}")
 	public ResponseEntity<ResponseDTO> rideComplected(@PathVariable Long id)
 	{
@@ -73,12 +73,4 @@ public class DriverController {
 				.status(HttpStatus.OK)
 				.body(new ResponseDTO(HttpStatus.OK,"Ride Complected"));
 	}
-
-
-	
-
-	
-	
-
-
 }

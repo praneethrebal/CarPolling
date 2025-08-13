@@ -108,11 +108,6 @@ public class BookingService {
 	    rideService.delete(rideDetails.getId());
 	    
 	}
-	
-
-
-	
-	
 	//-----------------------------------------------------
 	// MAPPINGS FUNCTIONS
 	//-----------------------------------------------------
